@@ -1,4 +1,4 @@
-package main
+package hangmanweb
 
 import (
 	"bufio"
@@ -17,7 +17,7 @@ type Message struct {
 	Stock    []byte
 }
 
-func main() {
+func Hangman() {
 	var word []byte
 	maj := false
 	min := false

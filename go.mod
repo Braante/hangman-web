@@ -1,3 +1,3 @@
-module hangman-web
+module hangmanweb
 
 go 1.17
