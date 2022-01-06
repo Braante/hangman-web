@@ -47,7 +47,7 @@ func Hangman() {
 		word = (WordChoose())
 		tableau = []byte{}
 	}
-	//cheat code
+	/* --- cheat code --- */
 	//fmt.Println(string((word)))
 	fmt.Println("Good Luck, you have", attempts, "attempts.")
 	lword := len(word)
@@ -175,6 +175,44 @@ func LetterAlea(word []byte) byte {
 	n := r1.Intn(len(word))
 	letter := word[n]
 	return letter
+}
+
+func PlusALea(word []byte) []byte {
+	compteur1 := 0
+	var letter byte
+	var stockLetter []byte
+	lword := len(word)
+	var tableau []byte
+
+	for i := 0; i < lword; i++ {
+		tableau = append(tableau, '_')
+	}
+
+	for i := 0; i < (len(word)/2)-1; i++ {
+		compteur1 = 0
+		letter = LetterAlea(word)
+		for j := 0; j < len(stockLetter); j++ {
+			if letter == stockLetter[j] {
+				i--
+				compteur1++
+				break
+			} else {
+				continue
+			}
+		}
+		if compteur1 > 0 {
+			continue
+		} else {
+			for j := 0; j < lword; j++ {
+				if word[j] == letter {
+					tableau[j] = letter
+					stockLetter = append(stockLetter, letter)
+					break
+				}
+			}
+		}
+	}
+	return tableau
 }
 
 func EnterLetter(tableauX []byte, lucky int, attempts int) (byte, []byte, int, bool, []byte, bool, bool) {

@@ -1,7 +1,7 @@
 package main
 
 import (
-	hangmanweb "hangmanweb/hangman"
+	"hangmanweb"
 	"net/http"
 	"text/template"
 )
@@ -17,11 +17,12 @@ type TodoPageData struct {
 }
 
 func main() {
-	hangmanweb.Hangman()
+	a := hangmanweb.WordChoose()
+	b := hangmanweb.PlusALea(a)
 	tmpl := template.Must(template.ParseFiles("../html/test.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := TodoPageData{
-			PageTitle: "My TODO list",
+			PageTitle: string(b),
 			Todos: []Todo{
 				{Title: "Task 1", Done: false},
 				{Title: "Task 2", Done: true},
