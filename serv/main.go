@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"hangmanweb"
 	"net/http"
 	"text/template"
@@ -19,8 +20,14 @@ type TodoPageData struct {
 func main() {
 	a := hangmanweb.WordChoose()
 	b := hangmanweb.PlusALea(a)
-	tmpl := template.Must(template.ParseFiles("../html/test.html"))
+	tmpl := template.Must(template.ParseFiles("html/test.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "POST":
+			letter := r.FormValue("letter")
+			fmt.Print(letter)
+		}
+
 		data := TodoPageData{
 			PageTitle: string(b),
 			Todos: []Todo{
@@ -32,4 +39,5 @@ func main() {
 		tmpl.Execute(w, data)
 	})
 	http.ListenAndServe(":8080", nil)
+
 }
