@@ -1,16 +1,13 @@
-<h1>{{.PageTitle}}</h1>
-<ul>
-    {{range .Todos}}
-        {{if .Done}}
-            <li class="done">{{.Title}}</li>
-        {{else}}
-            <li>{{.Title}}</li>
-        {{end}}
-    {{end}}
-</ul>
-<div>
-    <form method="POST" action="/">     
-        <label>Letter</label><input name="letter" type="text" value="" />
-        <input type="submit" value="submit" />
-    </form>
-  </div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <h1 style="font-size:400%;">{{.PageTitle}}</h1>
+    <div style="margin-left: 40%; margin-top: 5%;">
+        <form method="POST" action="/">     
+            <label>Lettre / mot </label><input name="lettre" type="text" value="" />
+            <input type="submit" value="valider" />
+        </form>
+      </div>
+</html>
