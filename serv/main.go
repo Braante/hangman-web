@@ -21,7 +21,7 @@ func main() {
 	b := hangmanweb.PlusALea(a)
 	min, maj, attempts := hangmanweb.Initialisation(a)
 	//fmt.Print(min, maj)
-	tmpl := template.Must(template.ParseFiles("html/test.html"))
+	tmpl := template.Must(template.ParseFiles("html/index.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if TextDeco != "You win" && TextDeco != "You lose" {
 
