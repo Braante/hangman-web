@@ -23,20 +23,22 @@ func main() {
 	//fmt.Print(min, maj)
 	tmpl := template.Must(template.ParseFiles("html/test.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		switch r.Method {
-		case "POST":
-			letter := r.FormValue("letter")
-			attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
-			fmt.Println("repasse")
-			if attempts == 11 {
-				b = a
-				TextDeco = "You win"
+		if TextDeco != "You win" && TextDeco != "You lose" {
+
+			switch r.Method {
+			case "POST":
+				letter := r.FormValue("letter")
+				attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
+				if attempts == 11 {
+					b = a
+					TextDeco = "You win"
+				}
+				if attempts <= 0 {
+					TextDeco = "You lose"
+				}
+				//fmt.Println(attempts)
+				//fmt.Print(letter)
 			}
-			if attempts <= 0 {
-				TextDeco = "You lose"
-			}
-			fmt.Println(attempts)
-			//fmt.Print(letter)
 		}
 		rep := hangmanweb.PrintTable(b)
 		if attempts == 11 || attempts <= 0 {

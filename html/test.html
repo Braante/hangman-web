@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="css/style.css" />
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Hangman-web</title>
+</head>
     <h1>{{.PageTitle}}</h1>
-    <h3>You have {{.Attemptsleft}} attempts remaining</h3>
+    <h2>You have {{.Attemptsleft}} attempts remaining</h2>
     <h1>{{.TextDeco}}</h1>
     <div>
         <form method="POST" action="/">     
-            <label>Lettre / mot </label><input name="letter" type="text" value="" />
+            <label>Lettre / mot </label><input name="letter" type="text" value="" required="required"/>
             <input type="submit" value="valider" />
         </form>
-      </div>
+    </div>
 </html>
