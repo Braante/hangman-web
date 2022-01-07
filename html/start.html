@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hangman-web</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <h1 style="margin-left: 30%;">Choississez un niveau :</h1>
+        <form method="POST" action="/index">
+            Select Gender:<br>
+          
+            <label>
+              <input type="radio" name="gender" value="eazy" required>
+              eazy
+            </label><br>
+          
+            <label>
+              <input type="radio" name="gender" value="normal">
+              normal
+            </label><br>
+          
+            <label>
+              <input type="radio" name="gender" value="hard">
+              hard
+            </label><br>
+          
+            <input type="submit" value="envoyer">
+          </form>
+    </body>
+</html>

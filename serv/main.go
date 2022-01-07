@@ -13,7 +13,21 @@ type TodoPageData struct {
 	TextDeco     string
 }
 
+type StartData struct {
+	PageTitle string
+}
+
 func main() {
+	tmpl1 := template.Must(template.ParseFiles("html/start.html"))
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case "POST":
+			level := r.FormValue("gender")
+			fmt.Println(level)
+		}
+		dota := StartData{}
+		tmpl1.Execute(w, dota)
+	})
 	TextDeco := ""
 	a := hangmanweb.WordChoose()
 	/* --- cheat code --- */
@@ -22,10 +36,13 @@ func main() {
 	min, maj, attempts := hangmanweb.Initialisation(a)
 	//fmt.Print(min, maj)
 	tmpl := template.Must(template.ParseFiles("html/index.html"))
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
 		if TextDeco != "You win" && TextDeco != "You lose" {
 
 			switch r.Method {
+			case "GET":
+				http.Redirect(w, r, "/start", 301)
+
 			case "POST":
 				letter := r.FormValue("letter")
 				attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
