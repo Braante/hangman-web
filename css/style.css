@@ -1,7 +1,11 @@
 h1 {
     font-size:400%;
-    margin-left: 45%; 
+    margin-left: 40%; 
     margin-top: 10%;
+}
+
+h3{
+    margin-left: 40%;
 }
 
 div {

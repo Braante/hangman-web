@@ -4,9 +4,11 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <h1>{{.PageTitle}}</h1>
+    <h3>You have {{.Attemptsleft}} attempts remaining</h3>
+    <h1>{{.TextDeco}}</h1>
     <div>
         <form method="POST" action="/">     
-            <label>Lettre / mot </label><input name="lettre" type="text" value="" />
+            <label>Lettre / mot </label><input name="letter" type="text" value="" />
             <input type="submit" value="valider" />
         </form>
       </div>
