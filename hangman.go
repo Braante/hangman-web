@@ -220,7 +220,6 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 	for _, wordabc := range letter {
 		rep = append(rep, byte(wordabc))
 	}
-
 	if len(rep) > 3 {
 		isALetter = false
 		for i := 0; i < len(letter)-2; i++ {
@@ -336,7 +335,7 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 		}
 	}
 	//fmt.Println(tableauX)
-	return rep[0], tableauX, lucky, isALetter, repsentence, isInvalid
+	return rep[0], tableauX, lucky, isALetter, rep, isInvalid
 }
 
 func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int, letter string) int {
@@ -350,11 +349,9 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 	lettertest, tableauX, lucky, isALetter, sentence, isInvalid = EnterLetter(letter, tableauX, lucky)
 	if isInvalid {
 		attempts = wrong(attempts)
-		fmt.Println("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
 	}
 	if !isALetter {
 		if len(sentence) > len(word) {
-			fmt.Println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 			attempts = wrong(attempts)
 			attempts = wrong(attempts)
 			//continue
@@ -389,16 +386,11 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 		}
 	}
 	if string(sentence) == string(word) {
-		if ChooseFile() {
-			PrintArtTable(word, min)
-		} else {
-			PrintTable(word)
-			fmt.Println()
-		}
+		PrintTable(word)
+		fmt.Println()
 		fmt.Println("Congrats !")
-		os.Exit(0)
+		return 11
 	} else if len(sentence) > 1 {
-		fmt.Println("ddddddddddddddddddddddddddddddd")
 		if attempts == 1 {
 			wrong(attempts)
 			os.Exit(0)
@@ -409,12 +401,8 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 		} else {
 			attempts = wrong(attempts)
 			attempts = wrong(attempts)
-			fmt.Println("ccccccccccccccccccccccccccccccccccccccccccccccccc")
 			//continue
 		}
-	}
-	if lucky == 1 {
-		//continue
 	}
 	if maj && (lettertest < 123 && lettertest > 96) {
 		lettertest = lettertest - 32
@@ -829,17 +817,14 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 				PrintArtTable(tableau, min)
 			} else {
 				PrintTable(tableau)
-				//fmt.Println("tttttttteeeeeeessssssssstttttttttt")
-				fmt.Println(letter)
 			}
 		} else if !maj {
 			attempts = wrong(attempts)
-			fmt.Println("ffffffffffffffffffffffffffffffffffffffffffff")
 		}
 	}
 
 	if CheckFin(tableau) {
-		os.Exit(0)
+		return 11
 	}
 	if attempts == 0 {
 		os.Exit(0)
@@ -873,13 +858,12 @@ func CheckFin(tableau []byte) bool {
 	return true
 }
 
-func PrintTable(tableau []byte) {
+func PrintTable(tableau []byte) string {
+	var repfinal string
 	for i := 0; i < len(tableau); i++ {
-		fmt.Print(string(tableau[i]))
-		fmt.Print(string(' '))
+		repfinal = repfinal + string(tableau[i])
 	}
-	fmt.Println()
-	fmt.Println()
+	return repfinal
 }
 
 func PrintHang(attempts int) {

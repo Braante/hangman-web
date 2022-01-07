@@ -30,12 +30,15 @@ func main() {
 		case "POST":
 			letter := r.FormValue("letter")
 			attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
+			if attempts == 11 {
+				b = a
+			}
 			fmt.Println(attempts)
 			//fmt.Print(letter)
 		}
-
+		rep := hangmanweb.PrintTable(b)
 		data := TodoPageData{
-			PageTitle: string(b),
+			PageTitle: rep,
 			Todos: []Todo{
 				{Title: "Task 1", Done: false},
 				{Title: "Task 2", Done: true},
