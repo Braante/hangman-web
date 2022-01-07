@@ -1061,3 +1061,16 @@ func PrintArtTable(tableau []byte, min bool) {
 		fmt.Println()
 	}
 }
+
+func Initialisation(word []byte) (bool, bool) {
+	min := false
+	maj := false
+
+	if (word[0] < 91 && word[0] > 64) || (word[0] < 215 && word[0] > 191) || (word[0] < 221 && word[0] > 216) {
+		maj = true
+	} else if (word[0] < 123 && word[0] > 96) || (word[0] > 223 && word[0] < 247) || (word[0] > 248 && word[0] <= 255) {
+		min = true
+	}
+
+	return min, maj
+}

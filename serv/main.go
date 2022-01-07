@@ -20,7 +20,9 @@ type TodoPageData struct {
 func main() {
 	a := hangmanweb.WordChoose()
 	b := hangmanweb.PlusALea(a)
-	tmpl := template.Must(template.ParseFiles("html/test.html"))
+	min, maj := hangmanweb.Initialisation(a)
+	fmt.Print(min, maj)
+	tmpl := template.Must(template.ParseFiles("../html/test.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
