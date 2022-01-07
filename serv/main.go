@@ -19,15 +19,19 @@ type TodoPageData struct {
 
 func main() {
 	a := hangmanweb.WordChoose()
+	/* --- cheat code --- */
+	fmt.Println(string((a)))
 	b := hangmanweb.PlusALea(a)
-	min, maj := hangmanweb.Initialisation(a)
-	fmt.Print(min, maj)
-	tmpl := template.Must(template.ParseFiles("../html/test.html"))
+	min, maj, attempts := hangmanweb.Initialisation(a)
+	//fmt.Print(min, maj)
+	tmpl := template.Must(template.ParseFiles("html/test.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case "POST":
 			letter := r.FormValue("letter")
-			fmt.Print(letter)
+			attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
+			fmt.Println(attempts)
+			//fmt.Print(letter)
 		}
 
 		data := TodoPageData{
@@ -41,5 +45,4 @@ func main() {
 		tmpl.Execute(w, data)
 	})
 	http.ListenAndServe(":8080", nil)
-
 }
