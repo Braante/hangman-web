@@ -217,6 +217,10 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 	var sentence []byte
 	var repsentence []byte
 	var rep []byte
+	if letter == "" {
+		rep = append(rep, 169)
+		return rep[0], tableauX, 6, isALetter, rep, true
+	}
 	for _, wordabc := range letter {
 		rep = append(rep, byte(wordabc))
 	}
@@ -229,7 +233,7 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 		for _, wordabc := range tempsentence {
 			repsentence = append(repsentence, byte(wordabc))
 		}
-	} else {
+	} else if !isInvalid {
 		if rep[0] >= 32 && rep[0] <= 64 {
 			isInvalid = true
 		}
@@ -335,6 +339,7 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 		}
 	}
 	//fmt.Println(tableauX)
+	//fmt.Println("valeur des trucs", rep[0], tableauX, lucky, isALetter, rep, isInvalid)
 	return rep[0], tableauX, lucky, isALetter, rep, isInvalid
 }
 
@@ -347,7 +352,7 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 	//for {
 	lucky := 0
 	lettertest, tableauX, lucky, isALetter, sentence, isInvalid = EnterLetter(letter, tableauX, lucky)
-	if isInvalid {
+	if isInvalid && lucky != 6 {
 		attempts = wrong(attempts)
 	}
 	if !isALetter {
@@ -883,13 +888,13 @@ func PrintHang(attempts int) {
 
 func wrong(attempts int) int {
 	attempts--
+	if attempts <= 0 {
+		return 0
+	}
 	fmt.Print("Not present in the word, ")
 	fmt.Print(attempts)
 	fmt.Println(" attempts remaining")
 	PrintHang(attempts)
-	if attempts <= 0 {
-		return 0
-	}
 	return attempts
 }
 

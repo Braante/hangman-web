@@ -14,7 +14,7 @@ type TodoPageData struct {
 }
 
 type StartData struct {
-	PageTitle string
+	PageLevel string
 }
 
 func main() {
@@ -36,12 +36,12 @@ func main() {
 	min, maj, attempts := hangmanweb.Initialisation(a)
 	//fmt.Print(min, maj)
 	tmpl := template.Must(template.ParseFiles("html/index.html"))
-	http.HandleFunc("/index", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/hangman", func(w http.ResponseWriter, r *http.Request) {
 		if TextDeco != "You win" && TextDeco != "You lose" {
 
 			switch r.Method {
 			case "GET":
-				http.Redirect(w, r, "/start", 301)
+				http.Redirect(w, r, "/", 301)
 
 			case "POST":
 				letter := r.FormValue("letter")
