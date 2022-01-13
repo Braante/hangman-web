@@ -15,9 +15,9 @@ entree
 escalier
 etagere
 etude
-extérieur
-fenêtre
-intérieur
+exterieur
+fenetre
+interieur
 lavabo
 lecture
 lit

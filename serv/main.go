@@ -29,12 +29,11 @@ func main() {
 		tmpl1.Execute(w, dota)
 	})
 	TextDeco := ""
-	a := hangmanweb.WordChoose()
-	/* --- cheat code --- */
-	fmt.Println(string((a)))
-	b := hangmanweb.PlusALea(a)
-	min, maj, attempts := hangmanweb.Initialisation(a)
-	//fmt.Print(min, maj)
+	var a []byte
+	var b []byte
+	attempts := 10
+	var min bool
+	var maj bool
 	tmpl := template.Must(template.ParseFiles("html/index.html"))
 	http.HandleFunc("/hangman", func(w http.ResponseWriter, r *http.Request) {
 		if TextDeco != "You win" && TextDeco != "You lose" {
@@ -44,7 +43,17 @@ func main() {
 				http.Redirect(w, r, "/", 301)
 
 			case "POST":
+				listwords := r.FormValue("Difficulty")
 				letter := r.FormValue("letter")
+				if len(listwords) != 0 {
+					a = hangmanweb.WordChoose(listwords)
+					/* --- cheat code --- */
+					fmt.Println(string((a)))
+					b = hangmanweb.PlusALea(a)
+					min, maj = hangmanweb.Initialisation(a)
+					//fmt.Print(min, maj)
+				}
+
 				attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
 				if attempts == 11 {
 					b = a

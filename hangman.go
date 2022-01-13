@@ -42,7 +42,7 @@ func Hangman() {
 		tableau = store.Tableau
 	} else {
 		attempts = 10
-		word = (WordChoose())
+		word = (WordChoose("normal"))
 		tableau = []byte{}
 	}
 	fmt.Println("Good Luck, you have", attempts, "attempts.")
@@ -94,13 +94,20 @@ func Hangman() {
 	CheckAccents(min, maj, tableau, word, attempts, string(letter))
 }
 
-func WordChoose() []byte {
+func WordChoose(listwords string) []byte {
 	var n int
 	cpt := 0
 	cptmot := 0
 	index := 0
-	args := os.Args[1]
+	args := ""
 	var word []byte
+	if listwords == "easy" {
+		args = "words.txt"
+	} else if listwords == "normal" {
+		args = "words2.txt"
+	} else if listwords == "hard" {
+		args = "words3.txt"
+	}
 	listword, err := ioutil.ReadFile(args)
 	if err != nil {
 		fmt.Println("This ListWord doesn't exist !")
@@ -112,7 +119,7 @@ func WordChoose() []byte {
 	arr = listword
 	var res []byte
 	for i := 0; i < len(arr); i++ {
-		if arr[i] == 13 {
+		if arr[i] == 10 {
 			cptmot++
 		}
 	}
@@ -129,7 +136,7 @@ func WordChoose() []byte {
 		n++
 	}
 	for i := 0; i < len(res); i++ {
-		if arr[i] == 13 {
+		if arr[i] == 10 {
 			cpt++
 			if n == 1 {
 				word = res[0:i]
@@ -141,7 +148,7 @@ func WordChoose() []byte {
 				return word
 			}
 			if cpt == n {
-				word = res[index+2 : i]
+				word = res[index+1 : i]
 				tempstr := string(word)
 				var word []byte
 				for _, wordabc := range tempstr {
@@ -151,7 +158,7 @@ func WordChoose() []byte {
 			}
 			if cpt == n-1 && cptmot+1 == n {
 				var temp []byte
-				word = res[index+2:]
+				word = res[index+1:]
 				for k := 0; k < len(word); k++ {
 					if word[k] == 10 {
 						temp = word[k+1:]
@@ -1031,10 +1038,9 @@ func PrintArtTable(tableau []byte, min bool) {
 	}
 }
 
-func Initialisation(word []byte) (bool, bool, int) {
+func Initialisation(word []byte) (bool, bool) {
 	min := false
 	maj := false
-	attempts := 10
 
 	if (word[0] < 91 && word[0] > 64) || (word[0] < 215 && word[0] > 191) || (word[0] < 221 && word[0] > 216) {
 		maj = true
@@ -1042,5 +1048,5 @@ func Initialisation(word []byte) (bool, bool, int) {
 		min = true
 	}
 
-	return min, maj, attempts
+	return min, maj
 }
