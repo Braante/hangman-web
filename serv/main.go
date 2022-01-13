@@ -20,11 +20,11 @@ type StartData struct {
 func main() {
 	tmpl1 := template.Must(template.ParseFiles("html/start.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		switch r.Method {
-		case "POST":
+		//switch r.Method {
+		/*case "POST":
 			level := r.FormValue("gender")
 			fmt.Println(level)
-		}
+		}*/
 		dota := StartData{}
 		tmpl1.Execute(w, dota)
 	})
@@ -34,6 +34,7 @@ func main() {
 	attempts := 10
 	var min bool
 	var maj bool
+	var tableauX []byte
 	tmpl := template.Must(template.ParseFiles("html/index.html"))
 	http.HandleFunc("/hangman", func(w http.ResponseWriter, r *http.Request) {
 		if TextDeco != "You win" && TextDeco != "You lose" {
@@ -54,7 +55,7 @@ func main() {
 					//fmt.Print(min, maj)
 				}
 
-				attempts = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter)
+				attempts, tableauX = hangmanweb.CheckAccents(min, maj, b, a, attempts, letter, tableauX)
 				if attempts == 11 {
 					b = a
 					TextDeco = "You win"

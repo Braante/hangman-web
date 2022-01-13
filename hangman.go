@@ -91,7 +91,8 @@ func Hangman() {
 		PrintTable(tableau)
 		fmt.Println()
 	}
-	CheckAccents(min, maj, tableau, word, attempts, string(letter))
+	var osef []byte
+	CheckAccents(min, maj, tableau, word, attempts, string(letter), osef)
 }
 
 func WordChoose(listwords string) []byte {
@@ -250,8 +251,8 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 	if isALetter && !isInvalid {
 		for i := 0; i < len(tableauX); i++ {
 			if rep[0] == tableauX[i] {
-				//fmt.Println("You have already tried this letter.")
-				lucky = 1
+				fmt.Println("You have already tried this letter.")
+				lucky = 5
 				//fmt.Println(tableauX)
 				return rep[0], tableauX, lucky, isALetter, repsentence, isInvalid
 			}
@@ -350,8 +351,8 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 	return rep[0], tableauX, lucky, isALetter, rep, isInvalid
 }
 
-func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int, letter string) int {
-	tableauX := []byte{}
+func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int, letter string, tableauX []byte) (int, []byte) {
+	//tableauX := []byte{}
 	var lettertest byte
 	var isALetter bool
 	var sentence []byte
@@ -359,6 +360,10 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 	//for {
 	lucky := 0
 	lettertest, tableauX, lucky, isALetter, sentence, isInvalid = EnterLetter(letter, tableauX, lucky)
+	fmt.Println("test tableau", tableauX)
+	if lucky == 5 {
+		return attempts, tableauX
+	}
 	if isInvalid && lucky != 6 {
 		attempts = wrong(attempts)
 	}
@@ -366,7 +371,7 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 		if len(sentence) > len(word) {
 			attempts = wrong(attempts)
 			attempts = wrong(attempts)
-			return attempts
+			return attempts, tableauX
 		}
 		for i := 0; i < len(sentence); i++ {
 			if sentence[i]-32 == word[i] {
@@ -401,19 +406,19 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 		PrintTable(word)
 		fmt.Println()
 		fmt.Println("Congrats !")
-		return 11
+		return 11, tableauX
 	} else if len(sentence) > 1 {
 		if attempts == 1 {
 			attempts = wrong(attempts)
-			return attempts
+			return attempts, tableauX
 		} else if attempts == 2 {
 			attempts = wrong(attempts)
 			attempts = wrong(attempts)
-			return attempts
+			return attempts, tableauX
 		} else {
 			attempts = wrong(attempts)
 			attempts = wrong(attempts)
-			return attempts
+			return attempts, tableauX
 		}
 	}
 	if maj && (lettertest < 123 && lettertest > 96) {
@@ -836,12 +841,12 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 	}
 
 	if CheckFin(tableau) {
-		return 11
+		return 11, tableauX
 	}
 	if attempts == 0 {
-		return attempts
+		return attempts, tableauX
 	}
-	return attempts
+	return attempts, tableauX
 }
 
 func Check(tableauV []byte, word []byte, letter byte, compteur int) ([]byte, int) {
