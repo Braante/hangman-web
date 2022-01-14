@@ -5,9 +5,12 @@
         <link rel="stylesheet" href="../css/style.css" />
     </head>
     <body>
-        <h1 style="margin-left: 30%;">Choississez un niveau :</h1>
         <form method="POST" action="/hangman">
-            Select Difficulty:<br>
+            <h1 class="start">Choose a name :</h1><br>
+              <label>
+                <input type="text" name="Username" required autocomplete="off">
+              </label>
+            <h1 class="start">Choose a Difficulty :</h1><br>
           
             <label>
               <input type="radio" name="Difficulty" value="easy" required>
@@ -24,7 +27,7 @@
               hard
             </label><br>
           
-            <input type="submit" value="envoyer">
+            <input type="submit" value="Send">
           </form>
     </body>
 </html>

@@ -232,7 +232,7 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 	for _, wordabc := range letter {
 		rep = append(rep, byte(wordabc))
 	}
-	if len(rep) > 3 {
+	if len(rep) >= 2 {
 		isALetter = false
 		for i := 0; i < len(letter)-2; i++ {
 			sentence = append(sentence, letter[i])
@@ -247,7 +247,6 @@ func EnterLetter(letter string, tableauX []byte, lucky int) (byte, []byte, int, 
 		}
 		isALetter = true
 	}
-
 	if isALetter && !isInvalid {
 		for i := 0; i < len(tableauX); i++ {
 			if rep[0] == tableauX[i] {
@@ -878,6 +877,14 @@ func PrintTable(tableau []byte) string {
 	var repfinal string
 	for i := 0; i < len(tableau); i++ {
 		repfinal = repfinal + string(tableau[i])
+	}
+	return repfinal
+}
+
+func PrintTableEspace(tableau []byte) string {
+	var repfinal string
+	for i := 0; i < len(tableau); i++ {
+		repfinal = repfinal + " " + string(tableau[i])
 	}
 	return repfinal
 }
