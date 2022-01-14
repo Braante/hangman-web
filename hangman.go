@@ -360,7 +360,6 @@ func CheckAccents(min bool, maj bool, tableau []byte, word []byte, attempts int,
 	//for {
 	lucky := 0
 	lettertest, tableauX, lucky, isALetter, sentence, isInvalid = EnterLetter(letter, tableauX, lucky)
-	fmt.Println("test tableau", tableauX)
 	if lucky == 5 {
 		return attempts, tableauX
 	}

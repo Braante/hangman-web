@@ -4,20 +4,27 @@ body {
 
 h1 {
     font-size:400%;
-    margin-left: 40%; 
+    margin-left: 100px; 
     margin-top: 10%;
 }
 
 h2{
-    margin-left: 40%;
+    font-size: 200%;
+    margin-left: 100px;
+    margin-top: 5%;
 }
 
 div {
-    margin-left: 40%;
+    margin-left: 100px;
     margin-top: 5%;
 }
 
 form {
     font-size:300%;
-    margin-left: 20%;
+}
+
+.box{
+    float: right;
+    margin-right: 50px;
+    margin-top: 50px;
 }

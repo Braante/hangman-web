@@ -20,11 +20,6 @@ type StartData struct {
 func main() {
 	tmpl1 := template.Must(template.ParseFiles("html/start.html"))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		//switch r.Method {
-		/*case "POST":
-			level := r.FormValue("gender")
-			fmt.Println(level)
-		}*/
 		dota := StartData{}
 		tmpl1.Execute(w, dota)
 	})
@@ -70,8 +65,9 @@ func main() {
 		rep := hangmanweb.PrintTable(b)
 		if attempts == 11 || attempts <= 0 {
 			data := TodoPageData{
-				PageTitle: rep,
-				TextDeco:  TextDeco,
+				PageTitle:    rep,
+				TextDeco:     TextDeco,
+				Attemptsleft: attempts,
 			}
 			tmpl.Execute(w, data)
 		} else {
@@ -85,5 +81,7 @@ func main() {
 	})
 	fs := http.FileServer(http.Dir("css/"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
+	fs2 := http.FileServer(http.Dir("images/"))
+	http.Handle("/images/", http.StripPrefix("/images/", fs2))
 	http.ListenAndServe(":8080", nil)
 }
