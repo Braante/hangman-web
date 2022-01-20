@@ -1,45 +1,47 @@
 body {
-    background-color: bisque;
+    background-image: url("fond.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
-h1 {
-    font-size:400%;
-    margin-left: 100px; 
-    margin-top: 10%;
-}
 
 h2{
     font-size: 200%;
-    margin-left: 100px;
     margin-top: 5%;
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
 }
 
-div {
-    margin-left: 100px;
+
+/*   start.html   */
+.startAll {
+    margin-left: 35%;
+}
+
+
+/*   start.html   */
+.police {
+    font-size: 400%;
     margin-top: 5%;
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-form {
-    font-size:300%;
+
+/*   start.html   */
+.choix{
+    margin-left: 5%;
+    font-size: 300%;
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.box{
-    float: right;
-    margin-right: 50px;
-    margin-top: 50px;
-}
 
-.start{
-    font-size: 100%;
-}
-
-.XXL {
-    font-size:600%;
-}
-
+/*   start.html   */
 .styled {
-    margin-left: 45%;
-    margin-top: 25%;
+    margin-left: 35%;
+    margin-top: 10%;
     border: 0;
     line-height: 2.5;
     padding: 0 20px;
@@ -49,6 +51,7 @@ form {
     text-shadow: 1px 1px 1px #000;
     border-radius: 10px;
     background-color: rgba(220, 0, 0, 1);
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-image: linear-gradient(to top left,
                                       rgba(0, 0, 0, .2),
                                       rgba(0, 0, 0, .2) 30%,
@@ -65,3 +68,96 @@ form {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
                 inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
+
+
+/*   start.html   &   index.html   */
+.espace {
+    padding-top: 1%;
+    padding-right: 2.5%;
+    padding-bottom: 1%;
+    padding-left: 2.5%;
+}
+
+
+/*   index.html   */
+.word {
+    margin-left: 10%;
+    margin-top: 5%;
+    font-size: 250%;
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+/*   index.html   */
+.box{
+    float: right;
+    margin-right: 50px;
+    margin-top: 50px;
+}
+
+
+/*   index.html   */
+header {
+    margin-left: 100px;
+    color: white;
+    font-size: 150%;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+/*   win.html   &   lose.html   */
+.winlose {
+    float: left;
+    font-size: 250%;
+    margin-left: 5%;
+    margin-top: 5%;
+    color: white;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+/*   win.html   &   lose.html   */
+aside {
+    float: right;
+    font-size: 150%;
+    width: 40%;
+    margin-top: 5%;
+    padding-left: .5rem;
+    float: right;
+    box-shadow: inset 5px 0 5px -5px #29627e;
+    color: #29627e;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+/*   win.html   &   lose.html   */
+.styledRestart {
+    margin-right: 5%;
+    margin-top: 30%;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgb(0, 70, 220);
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+.styledRestart:hover {
+    background-color: rgb(0, 110, 255);
+}
+
+.styledRestart:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
