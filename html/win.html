@@ -9,11 +9,23 @@
 </head>
 <body>
     <div class="XXL">
-        Congratulation ! You find the word
+        Congratulation ! You find the word {{.WordFind}}
     </div>
-    <!-- Bouton redémarrer -->
-    <form method="POST" action="/">
+    <div class="scoreboard">
+        <h1>Scoreboard :</h1>
+        <h1>{{.Scoreboards}}</h1>
+    </div>
+    <!-- Save button -->
+    <form method="POST" action="/win">
         <input class="favorite styled"
+        name="Save"
+        type="submit"
+        value="Save"> 
+    </form>
+    <!-- Bouton redémarrer -->
+    <form method="POST" action="/hangman">
+        <input class="favorite styled"
+        name="Restart"
         type="submit"
         value="Restart"> 
     </form>
