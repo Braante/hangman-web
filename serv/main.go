@@ -32,6 +32,7 @@ type TodoPageData struct {
 	LetterUsed   string
 	UserName     string
 	Restart      string
+	ScorePerso   int
 }
 
 type StartData struct {
@@ -44,6 +45,8 @@ func main() {
 		dota := StartData{}
 		tmpl1.Execute(w, dota)
 	})
+	sameuser := false
+	long := 0
 	chr := ""
 	lose := false
 	usersaved := false
@@ -94,6 +97,7 @@ func main() {
 				rep = ""
 				win = true
 				usersaved = false
+				tableauX = nil
 				http.Redirect(w, r, "/win", 301)
 			}
 			if attempts <= 0 {
@@ -101,6 +105,7 @@ func main() {
 				rep = ""
 				lose = true
 				score = 0
+				tableauX = nil
 				http.Redirect(w, r, "/lose", 301)
 			}
 		}
@@ -111,6 +116,7 @@ func main() {
 				LWU:          listwords,
 				Attemptsleft: attempts,
 				UserName:     name,
+				ScorePerso:   score,
 			}
 			tmpl.Execute(w, data)
 		} else {
@@ -122,6 +128,7 @@ func main() {
 				LetterUsed:   letterused,
 				UserName:     name,
 				LWU:          listwords,
+				ScorePerso:   score,
 			}
 			tmpl.Execute(w, data)
 		}
@@ -139,15 +146,60 @@ func main() {
 				oldchr, _ := ioutil.ReadFile("save.txt")
 				oldchrp := hangmanweb.PrintTable(oldchr)
 				score++
+				if score < 10 {
+					long = 6
+				} else {
+					long = 7
+				}
+				cpt := 0
+				if len(oldchrp) >= len(name)+long {
+					for k := 0; k < len(name); k++ {
+						if oldchrp[k] == name[k] {
+							cpt++
+						}
+					}
+					if cpt == len(name) {
+						oldchrp = oldchrp[len(name)+long:]
+						sameuser = true
+					}
+
+				}
 				file, _ := os.Create("save.txt")
 				scorestr := strconv.FormatInt(int64(score), 10)
 				chr = name + " " + scorestr + "<br>" + oldchrp
+				cptfin := 0
+				for k := 0; k < len(chr); k++ {
+					if chr[k] == '<' {
+						cptfin++
+					}
+				}
+				var invchr string
+				var invchr2 string
+				if cptfin == 11 && !sameuser {
+					for _, v := range chr {
+						invchr = string(v) + invchr
+					}
+					invchr = invchr[1:]
+					fmt.Println("agyfdgygy:", invchr)
+					cptlim := 0
+					for k := 0; k < len(invchr); k++ {
+						if invchr[k] != '>' {
+							cptlim++
+						} else {
+							break
+						}
+					}
+					invchr = invchr[cptlim:]
+					for _, v := range invchr {
+						invchr2 = string(v) + invchr2
+					}
+					chr = invchr2
+				}
 				file.WriteString(chr)
 				usersaved = true
 				file.Close()
 			}
 		}
-		fmt.Println("scoreboardfjier:0", chr)
 		doti := WinData{
 			WordFind:    rep,
 			Scoreboards: chr,
@@ -163,9 +215,12 @@ func main() {
 				http.Redirect(w, r, "/", 301)
 			}
 		}
+		oldchr, _ := ioutil.ReadFile("save.txt")
+		oldchrp := hangmanweb.PrintTable(oldchr)
 		resp := hangmanweb.PrintTable(a)
 		dyti := LoseData{
-			WordFind: resp,
+			WordFind:    resp,
+			Scoreboards: oldchrp,
 		}
 		tmplLose.Execute(w, dyti)
 	})
