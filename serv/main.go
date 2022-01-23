@@ -67,20 +67,15 @@ func main() {
 		case "GET":
 			http.Redirect(w, r, "/", 301)
 		case "POST":
-			fmt.Println("namia:", name)
 			if name == "" {
 				name = r.FormValue("Username")
 			}
-			fmt.Println("hfeu:", win)
 			if !win && listwords == "" {
-				fmt.Println("aieaieaie")
 				listword := r.FormValue("Difficulty")
 				listwords = listword
 			}
 			letter := r.FormValue("letter")
-			fmt.Println("listorsd:", listwords)
 			if (!min && !maj) || win || lose {
-				fmt.Println("peteuurtur")
 				a = hangmanweb.WordChoose(listwords)
 				/* --- cheat code --- */
 				fmt.Println(string((a)))
@@ -121,7 +116,6 @@ func main() {
 			tmpl.Execute(w, data)
 		} else {
 			letterused := hangmanweb.PrintTableEspace(tableauX)
-			fmt.Println("passagelaici")
 			data := TodoPageData{
 				PageTitle:    rep,
 				Attemptsleft: attempts,
@@ -180,7 +174,6 @@ func main() {
 						invchr = string(v) + invchr
 					}
 					invchr = invchr[1:]
-					fmt.Println("agyfdgygy:", invchr)
 					cptlim := 0
 					for k := 0; k < len(invchr); k++ {
 						if invchr[k] != '>' {
@@ -229,5 +222,5 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 	fs2 := http.FileServer(http.Dir("images/"))
 	http.Handle("/images/", http.StripPrefix("/images/", fs2))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe("localhost:8080", nil)
 }
