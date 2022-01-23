@@ -4,30 +4,30 @@
         <title>Hangman-web</title>
         <link rel="stylesheet" href="../css/style.css" />
     </head>
-    <body>
+    <body class="startAll">
         <form method="POST" action="/hangman">
-            <h1 class="start">Choose a name :</h1><br>
-              <label>
-                <input type="text" name="Username" required autocomplete="off">
-              </label>
-            <h1 class="start">Choose a Difficulty :</h1><br>
+            <h1 class="police"> Choose a name :</h1><br>
+              <label class="choix">
+                <input class="espace" type="text" name="Username" required autocomplete="off">
+              </label> 
+            <h1 class="police"> Choose a Difficulty :</h1><br>
           
-            <label>
+            <label class="choix">
               <input type="radio" name="Difficulty" value="easy" required>
               easy
             </label><br>
           
-            <label>
+            <label class="choix">
               <input type="radio" name="Difficulty" value="normal">
               normal
             </label><br>
           
-            <label>
+            <label class="choix">
               <input type="radio" name="Difficulty" value="hard">
               hard
             </label><br>
           
-            <input type="submit" value="Send">
+            <input class="favorite styled" type="submit" value="Send">
           </form>
     </body>
 </html>

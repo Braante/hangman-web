@@ -8,24 +8,23 @@
     <title>Hangman-web</title>
 </head>
 <body>
-    <div class="XXL">
+    <div class="winlose">
         Congratulation ! You find the word {{.WordFind}}
     </div>
-    <div class="scoreboard">
+    <!-- Scoreboard -->
+    <aside class="scoreboard">
         <h1>Scoreboard :</h1>
         <h1>{{.Scoreboards}}</h1>
-    </div>
+    </aside>
     <!-- Save button -->
     <form method="POST" action="/win">
         <input class="favorite styled"
-        name="Save"
         type="submit"
         value="Save"> 
     </form>
     <!-- Bouton redémarrer -->
     <form method="POST" action="/hangman">
-        <input class="favorite styled"
-        name="Restart"
+        <input class="favorite styledRestart"
         type="submit"
         value="Restart"> 
     </form>
